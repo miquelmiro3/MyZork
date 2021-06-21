@@ -9,8 +9,7 @@ enum EntityType
 	roomExit,
 	room,
 	item,
-	player,
-	npc
+	creature
 };
 
 class Entity

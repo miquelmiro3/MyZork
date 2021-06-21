@@ -12,6 +12,8 @@ public:
 	~World();
 	bool Update(const vector<string>& _action);
 
+	bool quit;
+
 private:
 	vector<Entity*> entities;
 	Player* player;

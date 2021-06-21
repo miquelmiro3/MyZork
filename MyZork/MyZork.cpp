@@ -28,15 +28,18 @@ int main()
     string _input;
     vector<string> _action;
 
-    cout << "Welcome MyZork!" << endl;
+    cout << "Welcome to MyZork!!" << endl;
+    cout << "Use help or h anytime to see all possible comands." << endl;
+    cout << " While you were looking for the lost treasure in the forest, the ground collapsed and you fell into an underground chamber." << endl;
 
     while (1) {
-        cout << ">";
+        cout << endl << ">";
 
         getline(cin, _input);
         _action = String2Vector(_input);
 
-        if (!_world.Update(_action)) cout << "That's not a verb I recognise." << endl;
+        if (!_world.Update(_action)) cout << " That's not a verb I recognise." << endl;
 
+        if (_world.quit) break;
     }
 }

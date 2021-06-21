@@ -4,6 +4,8 @@
 
 Exit::Exit(const string& _name, const string& _description, string _direction, string _reverseDirection, Room* _source, Room* _destination) :
 Entity(_name, _description) {
+	type = roomExit;
+
 	direction = _direction;
 	reverseDirection = _reverseDirection;
 	source = _source;
@@ -16,7 +18,7 @@ Entity(_name, _description) {
 	key = NULL;
 }
 
-void Exit::LockExit(Item* _key) {
+void Exit::Lock(Item* _key) {
 	locked = true;
 	key = _key;
 }

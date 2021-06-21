@@ -1,4 +1,6 @@
-﻿  Player.cpp
+﻿  Creature.cpp
+  Item.cpp
   World.cpp
   Generando código...
+  LINK : no se encontró C:\Users\PC\Desktop\Pers\Master\MyZork\x64\Debug\MyZork.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   MyZork.vcxproj -> C:\Users\PC\Desktop\Pers\Master\MyZork\x64\Debug\MyZork.exe
