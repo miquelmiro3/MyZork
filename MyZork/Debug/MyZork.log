@@ -1,0 +1,11 @@
+﻿  Creature.cpp
+  Entity.cpp
+  Exit.cpp
+  Item.cpp
+  MyZork.cpp
+  NPC.cpp
+  Player.cpp
+  Room.cpp
+  World.cpp
+  Generando código...
+  MyZork.vcxproj -> C:\Users\PC\Desktop\Pers\Master\MyZork\Debug\MyZork.exe
