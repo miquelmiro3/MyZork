@@ -1,6 +1,18 @@
-#include "Creature.h"
+#include <string>
 
-class Player : public Creature
+using namespace std;
+
+class Room;
+
+#pragma once
+class Player
 {
+public:
+	Player(Room* _location);
+
+	void Move(const string& _direction);
+
+private:
+	Room* location;
 };
 

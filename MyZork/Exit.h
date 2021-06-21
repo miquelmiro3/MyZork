@@ -1,11 +1,22 @@
 #include "Entity.h"
-#include "Room.h"
 
+class Room;
+class Item;
+
+#pragma once
 class Exit : public Entity
 {
 public:
-	DirectionType direction;
+	Exit(const string& _name, const string& _description, const string _direction, const string _reverseDirection, Room* _source, Room* _destination);
+
+	void LockExit(Item* _key);
+	bool SameDirection(Room* _room, const string _direction);
+
+	string direction;
+	string reverseDirection;
 	Room* source;
 	Room* destination;
+	bool locked;
+	Item* key;
 };
 

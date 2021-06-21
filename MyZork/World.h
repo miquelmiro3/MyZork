@@ -10,6 +10,7 @@ class World
 public:
 	World();
 	~World();
+	bool Update(const vector<string>& _action);
 
 private:
 	vector<Entity*> entities;
