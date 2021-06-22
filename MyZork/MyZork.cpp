@@ -42,4 +42,5 @@ int main()
 
         if (_world.quit) break;
     }
+    getline(cin, _input);
 }

@@ -1,0 +1,13 @@
+﻿  Creature.cpp
+  Entity.cpp
+  Exit.cpp
+  Item.cpp
+  MyZork.cpp
+  Player.cpp
+  Room.cpp
+  World.cpp
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+  All 439 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+  MyZork.vcxproj -> C:\Users\PC\Desktop\Pers\Master\MyZork\x64\Release\MyZork.exe

@@ -10,6 +10,7 @@ class World
 public:
 	World();
 	~World();
+	bool ValidDirection(string& _direction);
 	bool Update(const vector<string>& _action);
 
 	bool quit;

@@ -10,7 +10,7 @@ class Item;
 class Player
 {
 public:
-	Player(Room* _location);
+	Player(int _health, int _attack, Room* _location);
 
 	bool Move(const string& _direction);
 	void Look();
@@ -20,9 +20,18 @@ public:
 	void Pick(const string& _item);
 	void Inventory();
 	void Drop(const string& _item);
+	void Stats();
+	bool Attack(const string& _objective);
+	void Equip(const string& _equipable);
+	void Combine(const string& _item1, const string& _item2);
+
+	int health;
+	int maxHealth;
+	int attack;
 
 private:
 	Room* location;
 	list<Item*> inventory;
+	Item* equipped;
 };
 

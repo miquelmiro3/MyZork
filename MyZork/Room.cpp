@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "Exit.h"
 #include "Item.h"
+#include "Creature.h"
 
 Room::Room(const string& _name, const string& _description, Entity* _parent) :
 Entity(_name, _description, _parent) {
@@ -30,6 +31,11 @@ bool Room::Examine(const string& _entity) {
 	for (list<Entity*>::iterator _it = contains.begin(); _it != contains.end(); _it++) {
 		if ((*_it)->name == _entity) {
 			cout << " " << (*_it)->description << endl;
+			if ((*_it)->type == creature) {
+				Creature* _c = ((Creature*)(*_it));
+				cout << "  Health: " << _c->health << "/" << _c->maxHealth << endl;
+				cout << "  Attack: " << _c->attack << endl;
+			}
 			return true;
 		}
 	}
@@ -40,6 +46,16 @@ Item* Room::FindItem(const string& _item) {
 	for (list<Entity*>::iterator _it = contains.begin(); _it != contains.end(); _it++) {
 		if ((*_it)->name == _item) {
 			if ((*_it)->type == item) return (Item*)(*_it);
+			else return NULL;
+		}
+	}
+	return NULL;
+}
+
+Creature* Room::FindCreature(const string& _creature) {
+	for (list<Entity*>::iterator _it = contains.begin(); _it != contains.end(); _it++) {
+		if ((*_it)->name == _creature) {
+			if ((*_it)->type == creature) return (Creature*)(*_it);
 			else return NULL;
 		}
 	}

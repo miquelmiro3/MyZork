@@ -1,10 +1,12 @@
 #include "Item.h"
 #include "Creature.h"
 
-Item::Item(const string& _name, const string& _description, Entity* _parent) :
+Item::Item(const string& _name, const string& _description, ItemType _itemType, Entity* _parent) :
 Entity(_name, _description, _parent) {
 	type = item;
 
+	itemType = _itemType;
+	attack = 0;
 	locked = false;
 	protector = NULL;
 }

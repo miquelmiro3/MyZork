@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "World.h"
 #include "Entity.h"
 #include "Room.h"
@@ -24,15 +24,17 @@ World::World() {
 	entities.push_back(_treasureChamber);
 
 	// CREATURES
-	Creature* _orc = new Creature("Orc", "A soldier orc, you may win him with a good weapon.", _habitatedRoom);
+	Creature* _orc = new Creature("Orc", "A soldier orc, you may win him with a good weapon.", 20, 8, _habitatedRoom);
 
 	// ITEMS
-	Item* _sword = new Item("Sword", "A standard sword.", _entrance);
-	Item* _magicRune = new Item("MagicRune", "A magic rune that can be attached to a sword.", _forge);
-	Item* _ironKey = new Item("IronKey", "A iron key.", _darkRoom);
-	Item* _goldenKey = new Item("GoldenKey", "A golden key.", _habitatedRoom);
+	Item* _sword = new Item("Sword", "A standard sword.", equipable, _entrance);
+	Item* _magicRune = new Item("MagicRune", "A magic rune that can be attached to a sword.", upgrade, _forge);
+	Item* _ironKey = new Item("IronKey", "A iron key.", key, _darkRoom);
+	Item* _goldenKey = new Item("GoldenKey", "A golden key.", key, _habitatedRoom);
 
 	_goldenKey->Lock(_orc);
+	_sword->attack = 4;
+	_magicRune->attack = 4;
 
 	// EXITS
 	Exit* _goldenDoor = new Exit("GoldenDoor", "You see a shiny golden door.", "east", "west", _entrance, _treasureChamber);
@@ -44,17 +46,58 @@ World::World() {
 	_ironDoor->Lock(_ironKey);
 
 	// PLAYER
-	player = new Player(_entrance);
+	player = new Player(20, 2, _entrance);
 }
 
 World::~World() {
 
 }
 
+
+bool World::ValidDirection(string& _direction) {
+	if (_direction == "north" || _direction == "west" || _direction == "south" || _direction == "east") return true;
+	if (_direction == "n") {
+		_direction = "north";
+		return true;
+	}
+	if (_direction == "w") {
+		_direction = "west";
+		return true;
+	}
+	if (_direction == "s") {
+		_direction = "south";
+		return true;
+	}
+	if (_direction == "e") {
+		_direction = "east";
+		return true;
+	}
+	return false;
+}
+
 bool World::Update(const vector<string>& _action) {
 	switch (_action.size()) {
 		case 1:
-			if (_action[0] == "look" || _action[0] == "l") {
+			if (_action[0] == "help" || _action[0] == "h") {
+				cout << " Possible directions:" << endl;
+				cout << "  north (n), west (w), south (s), east (e)" << endl;
+				cout << " Possible commands:" << endl;
+				cout << "  (q) quit -> to exit the game" << endl;
+				cout << "  (l) look -> to look the room" << endl;
+				cout << "  (l) look direction -> to look at a direction of the room" << endl;
+				cout << "  (m) move direction -> to move from a room to another" << endl;
+				cout << "  (e) examine -> to examine the room for entities" << endl;
+				cout << "  (e) examine entity -> to examine a item or a creature of the room or inventory (ex.: e Orc)" << endl;
+				cout << "  (i) inventory -> to see the items of your inventory" << endl;
+				cout << "  (p) pick item -> to pick an item of a room (ex.: p Sword)" << endl;
+				cout << "  (d) drop item -> to drop an item to a room" << endl;
+				cout << "  (s) stats -> to see the stats of your hero" << endl;
+				cout << "  (eq) equip item -> to equip an item of the inventory" << endl;
+				cout << "  (a) attack creature -> to attack a creature of a room" << endl;
+				cout << "  (c) combine item1 item2 -> to combine items of the inventory (you only can combine equipables with upgrades)" << endl;
+				return true;
+			}
+			else if (_action[0] == "look" || _action[0] == "l") {
 				player->Look();
 				return true;
 			}
@@ -70,20 +113,32 @@ bool World::Update(const vector<string>& _action) {
 				quit = true;
 				return true;
 			}
+			else if (_action[0] == "stats" || _action[0] == "s") {
+				player->Stats();
+				return true;
+			}
 			break;
 
 		case 2:
 			if (_action[0] == "look" || _action[0] == "l") {
-				player->Look(_action[1]);
-				return true;
+				string _dir = _action[1];
+				if (ValidDirection(_dir)) {
+					player->Look(_dir);
+					return true;
+				}
+				return false;
 			}
 			else if (_action[0] == "examine" || _action[0] == "e") {
 				player->Examine(_action[1]);
 				return true;
 			}
 			else if (_action[0] == "move" || _action[0] == "m") {
-				quit = player->Move(_action[1]);
-				return true;
+				string _dir = _action[1];
+				if (ValidDirection(_dir)) {
+					quit = player->Move(_dir);
+					return true;
+				}
+				return false;
 			}
 			else if (_action[0] == "pick" || _action[0] == "p") {
 				player->Pick(_action[1]);
@@ -93,9 +148,21 @@ bool World::Update(const vector<string>& _action) {
 				player->Drop(_action[1]);
 				return true;
 			}
+			else if (_action[0] == "attack" || _action[0] == "a") {
+				quit = player->Attack(_action[1]);
+				return true;
+			}
+			else if (_action[0] == "equip" || _action[0] == "eq") {
+				player->Equip(_action[1]);
+				return true;
+			}
 			break;
 
 		case 3:
+			if (_action[0] == "combine" || _action[0] == "c") {
+				player->Combine(_action[1], _action[2]);
+				return true;
+			}
 			break;
 
 		default:
@@ -103,19 +170,3 @@ bool World::Update(const vector<string>& _action) {
 	}
 	return false;
 }
-
-
-//----move direction
-//----look a solas -> habitacion
-//----look direction -> portas
-//----examine a solas -> cosas de la habitacion
-//----examine x -> item / creature de la room i inventory
-//----inventory
-//----pick x
-//----drop x
-//----quit
-//attack x
-//equip x
-//combine x y
-//stats
-//help
