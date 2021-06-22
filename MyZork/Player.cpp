@@ -131,6 +131,11 @@ void Player::Stats() {
 
 bool Player::Attack(const string& _objective) {
 	Creature* _c = location->FindCreature(_objective);
+	if (_c == NULL) {
+		cout << " You can't attack that." << endl;
+		return false;
+	}
+
 	_c->health -= attack;
 	if (_c->health <= 0) {
 		cout << " You have won the: " << _c->name << endl;
@@ -155,9 +160,12 @@ void Player::Equip(const string& _equipable) {
 		if ((*_it)->name == _equipable) {
 			if ((*_it)->itemType != equipable) cout << " You can't equip that." << endl;
 			else {
-				equipped = (*_it);
-				attack += (*_it)->attack;
-				cout << " You have equipped: " << (*_it)->name << endl;
+				if ((*_it) == equipped) cout << " You already have that equipped." << endl;
+				else {
+					equipped = (*_it);
+					attack += (*_it)->attack;
+					cout << " You have equipped: " << (*_it)->name << endl;
+				}
 			}
 			return;
 		}

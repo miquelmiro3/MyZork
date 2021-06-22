@@ -1,7 +1,7 @@
 ﻿  Player.cpp
   Generando código
-  2 of 439 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  4 of 439 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   MyZork.vcxproj -> C:\Users\PC\Desktop\Pers\Master\MyZork\x64\Release\MyZork.exe
