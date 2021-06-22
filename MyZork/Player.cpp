@@ -192,6 +192,7 @@ void Player::Combine(const string& _item1, const string& _item2) {
 	}
 	if (_equipable == NULL || _upgrade == NULL) cout << " You don't have this items." << endl;
 	else {
+		cout << " You combined the items." << endl;
 		_equipable->contains.push_back(_upgrade);
 		inventory.remove(_upgrade);
 		if (_equipable == equipped) attack += _upgrade->attack;
