@@ -17,8 +17,6 @@ class Entity
 public:
 	Entity(const string& _name, const string& _description, Entity* _parent = NULL);
 
-	list<Entity*> FindEntity(EntityType _type);
-
 	EntityType type;
 	string name;
 	string description;

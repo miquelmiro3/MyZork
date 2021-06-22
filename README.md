@@ -50,7 +50,7 @@ To win you need to arrive to the TreasureChamber, and for that you need the Gold
 
 MIT License
 
-Copyright (c) 2021 - Miquel Miro
+Copyright (c) 2021 - Miquel Miro Rovira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
